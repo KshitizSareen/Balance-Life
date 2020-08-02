@@ -23,7 +23,7 @@ class Income extends Component {
       token: '',
       username: '',
       Amount: 0,
-      item1: item1,
+      item1: Sheets[Sheets.length - 1],
       itemid: 0,
     };
   }
@@ -130,7 +130,6 @@ class Income extends Component {
   }
   componentWillUnmount() {
     this._unsubscribe();
-    Sheets.pop();
   }
   render() {
     var t = this;
@@ -206,7 +205,7 @@ class Expense extends Component {
       token: '',
       username: '',
       Amount: 0,
-      item1: item1,
+      item1: Sheets[Sheets.length - 1],
       itemid: 0,
     };
   }
@@ -312,7 +311,6 @@ class Expense extends Component {
   }
   componentWillUnmount() {
     this._unsubscribe();
-    Sheets.pop();
   }
   render() {
     var t = this;
@@ -383,7 +381,10 @@ class BalanceSheet extends Component {
   componentDidMount() {
     (token = this.props.route.params.token),
       (username = this.props.route.params.username),
-      Sheets.Add(this.props.route.params.item);
+      Sheets.push(this.props.route.params.item);
+  }
+  componentWillUnmount() {
+    Sheets.pop();
   }
   render() {
     return (
