@@ -13,7 +13,7 @@ import {faDollarSign} from '@fortawesome/free-solid-svg-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 var token = null;
 var username = null;
-var item1 = null;
+var Sheets = [];
 class Income extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +35,7 @@ class Income extends Component {
   componentDidMount() {
     var t = this;
     setTimeout(() => {
-      t.setState({item1: item1});
+      t.setState({item1: Sheets[Sheets.length - 1]});
     }, 10),
       (this._unsubscribe = this.props.navigation.addListener('focus', () => {
         setTimeout(() => {
@@ -130,6 +130,7 @@ class Income extends Component {
   }
   componentWillUnmount() {
     this._unsubscribe();
+    Sheets.pop();
   }
   render() {
     var t = this;
@@ -217,7 +218,7 @@ class Expense extends Component {
   componentDidMount() {
     var t = this;
     setTimeout(() => {
-      t.setState({item1: item1});
+      t.setState({item1: Sheets[Sheets.length - 1]});
     }, 10),
       (this._unsubscribe = this.props.navigation.addListener('focus', () => {
         setTimeout(() => {
@@ -311,6 +312,7 @@ class Expense extends Component {
   }
   componentWillUnmount() {
     this._unsubscribe();
+    Sheets.pop();
   }
   render() {
     var t = this;
@@ -381,7 +383,7 @@ class BalanceSheet extends Component {
   componentDidMount() {
     (token = this.props.route.params.token),
       (username = this.props.route.params.username),
-      (item1 = this.props.route.params.item);
+      Sheets.Add(this.props.route.params.item);
   }
   render() {
     return (
